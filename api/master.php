@@ -24,7 +24,6 @@ $ch = curl_init();
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
     $json=curl_exec($ch);
 	$dump=str_replace('/hls',$url_base.'/hls',$json);
-	$dump_final=str_replace('http://','https://vercel-blob-php-sigma.vercel.app/api/ts.php?data=',$dump);
-	echo $dump_final;
+	echo $dump;
 
 ?>
