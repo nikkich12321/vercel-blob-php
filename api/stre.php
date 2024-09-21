@@ -1,10 +1,8 @@
 <?php
 $id=$_REQUEST['id'];
-$array_len_dump=['5', '6', '7', '11', '15'];
-$str_len=$array_len_dump[array_rand($array_len_dump)];
 $ch = curl_init();
     $headers = array(
-'user-agent: '.bin2hex(random_bytes($str_len)),
+'user-agent: '.base64_encode(time()),
     );
     curl_setopt($ch, CURLOPT_URL, 'http://livetvbox.live:8080/live/shoaib/shoaib/'.$id.'.m3u8');
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
