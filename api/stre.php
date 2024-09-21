@@ -22,7 +22,7 @@ $ch = curl_init();
     $json=curl_exec($ch);
 	$redirectedUrl = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
 	$dump=base64_encode($redirectedUrl);
-	header('Location: https://vercel-blob-php-sigma.vercel.app/api/master.php?id='.$id.'&data='.$dump.'e=j.m3u8');
+	header('Location: https://vercel-blob-php-sigma.vercel.app/api/master.php?id='.$id.'&data='.$dump.'&e=j.m3u8');
 	exit;
 
 ?>

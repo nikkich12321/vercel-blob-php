@@ -7,9 +7,10 @@ $url_base=$url_dump[0];
 #echo $url_base;
 $array_len_dump=['5', '6', '7', '11', '15'];
 $str_len=$array_len_dump[array_rand($array_len_dump)];
+$useragent=bin2hex(random_bytes($str_len));
 $ch = curl_init();
     $headers = array(
-'user-agent: '.bin2hex(random_bytes($str_len)),
+'user-agent: '.$useragent,
     );
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -26,6 +27,7 @@ $ch = curl_init();
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
     $json=curl_exec($ch);
 	$dump=str_replace('/hls',$url_base.'/hls',$json);
-	echo $dump;
+	$dump_final=str_replace('.ts','.ts|User-Agent='.$useragent,$dump);
+	echo $dump_final;
 
 ?>
