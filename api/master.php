@@ -5,9 +5,11 @@ $url=base64_decode($data);
 $url_dump=explode('/live/shoaib/shoaib/'.$id.'.m3u8',$url);
 $url_base=$url_dump[0];
 #echo $url_base;
+$array_len_dump=['5', '6', '7', '11', '15'];
+$str_len=$array_len_dump[array_rand($array_len_dump)];
 $ch = curl_init();
     $headers = array(
-'user-agent: '.base64_encode(time()),
+'user-agent: '.bin2hex(random_bytes($str_len)),
     );
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
