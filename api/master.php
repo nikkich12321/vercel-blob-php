@@ -27,7 +27,7 @@ $ch = curl_init();
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
     $json=curl_exec($ch);
 	$dump=str_replace('/hls',$url_base.'/hls',$json);
-	$dump_final=str_replace('.ts','.ts|User-Agent='.$useragent,$dump);
-	echo $dump_final;
+	#$dump_final=str_replace('.ts','.ts|User-Agent='.$useragent,$dump);
+	echo $dump;
 
 ?>
