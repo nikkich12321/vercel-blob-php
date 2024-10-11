@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For raising GSTR 3B on BO portal</title>
+</head>
+<body>
+    <h2>For raising GSTR 3B on BO portal: Enter Initial Year, Final Year, AuthToken and GSTIN</h2>
+
+    <!-- Input fields for initial year, final year, and AuthToken -->
+    <label for="startYear">Initial Year (e.g. 2017-18):</label>
+    <input type="text" id="startYear" placeholder="Enter initial year"><br><br>
+
+    <label for="endYear">Final Year (e.g. 2020-21):</label>
+    <input type="text" id="endYear" placeholder="Enter final year"><br><br>
+
+    <label for="authToken">AuthToken:</label>
+    <input type="text" id="authToken" placeholder="Enter your AuthToken"><br><br>
+	
+	<label for="gstin">GSTIN:</label>
+    <input type="text" id="gstin" placeholder="Enter GSTIN here"><br><br>
+
+    <button onclick="displayMonths()">Display Months</button>
+
+    <h3>Months between the selected period:</h3>
+    <div id="output"></div>
+
+    <script>
+        // Define the array with sub-array elements
+        var years = [
+            {
+                "year": "2017-18",
+                "months": ["072017", "082017", "092017", "102017", "112017", "122017", "012018", "022018", "032018"]
+            },
+            {
+                "year": "2018-19",
+                "months": ["042018", "052018", "062018", "072018", "082018", "092018", "102018", "112018", "122018", "012019", "022019", "032019"]
+            },
+            {
+                "year": "2019-20",
+                "months": ["042019", "052019", "062019", "072019", "082019", "092019", "102019", "112019", "122019", "012020", "022020", "032020"]
+            },
+            {
+                "year": "2020-21",
+                "months": ["042020", "052020", "062020", "072020", "082020", "092020", "102020", "112020", "122020", "012021", "022021", "032021"]
+            },
+            {
+                "year": "2021-22",
+                "months": ["042021", "052021", "062021", "072021", "082021", "092021", "102021", "112021", "122021", "012022", "022022", "032022"]
+            },
+            {
+                "year": "2022-23",
+                "months": ["042022", "052022", "062022", "072022", "082022", "092022", "102022", "112022", "122022", "012023", "022023", "032023"]
+            },
+            {
+                "year": "2023-24",
+                "months": ["042023", "052023", "062023", "072023", "082023", "092023", "102023", "112023", "122023", "012024", "022024", "032024"]
+            }
+        ];
+
+        // Function to display the months between selected years and send GET requests
+        function displayMonths() {
+            var startYear = document.getElementById("startYear").value;
+            var endYear = document.getElementById("endYear").value;
+            var authToken = document.getElementById("authToken").value; // Get the AuthToken from user input
+			var gstin = document.getElementById("gstin").value;	
+            var output = document.getElementById("output");
+
+            var startIndex = years.findIndex(y => y.year === startYear);
+            var endIndex = years.findIndex(y => y.year === endYear);
+
+            if (startIndex === -1 || endIndex === -1) {
+                output.innerHTML = "Invalid year(s) entered. Please enter valid years from 2017-18 to 2023-24.";
+                return;
+            }
+
+            if (startIndex > endIndex) {
+                output.innerHTML = "Initial year must be before the final year.";
+                return;
+            }
+
+            var monthsList = [];
+            for (var i = startIndex; i <= endIndex; i++) {
+                monthsList = monthsList.concat(years[i].months);
+            }
+
+            // Clear the output section
+            output.innerHTML = "";
+
+            // Display months and make GET requests for each month with the AuthToken in the header
+            monthsList.forEach(function(month, index) {
+                // Create a div for each month and its result
+                var monthDiv = document.createElement("div");
+                monthDiv.id = "month-" + index;
+                monthDiv.innerHTML = month + ": Loading..."; // Display loading initially
+                output.appendChild(monthDiv);
+
+                // Send GET request to the API for each month with AuthToken in the header
+                fetch("https://boweb.internal.gst.gov.in/boreturns/auth/bo/api/offline/download/generate?file_type=SUM_M&gstin="+ gstin + "&rtn_prd=" + month + "&rtn_typ=GSTR3B&AuthToken=" + authToken, {
+                    method: "GET",
+					headers: {
+					'Referer': 'https://boweb.internal.gst.gov.in/',
+					'Origin': 'https://boweb.internal.gst.gov.in'}
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status + ' ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    // Display the result next to the month
+                    if (result.status == 1 && result.data.token) {
+                        document.getElementById("month-" + index).innerHTML = month + ": File Generation initiated";
+                    } else if (result.status == 1 && !result.data.token) {
+                        document.getElementById("month-" + index).innerHTML = month + ": File is already generated";
+                    } else {
+                        document.getElementById("month-" + index).innerHTML = month + ": File generation already initiated, please wait for 20 minutes";
+                    }
+                })
+                .catch(error => {
+                    // Handle any errors
+                    document.getElementById("month-" + index).innerHTML = month + ": Error fetching data";
+                });
+            });
+        }
+    </script>
+</body>
+</html>
