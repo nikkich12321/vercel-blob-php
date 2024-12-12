@@ -23,7 +23,7 @@ function manifest($ch_id){
     $headers = array(
 	'user-agent: '.base64_encode(time()),
     );
-    curl_setopt($ch, CURLOPT_URL, 'http://livetvbox.live:8080/live/shoaib/shoaib/'.$ch_id.'.m3u8');
+    curl_setopt($ch, CURLOPT_URL, 'http://livetvbox.live:8080/live/18531853/18531853/'.$ch_id.'.m3u8');
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_HEADER, 0);
 #	curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
@@ -48,7 +48,7 @@ function master($base_url){
 	$id=$dump[0];
 	$data=$dump[1];
 	$url=hex2bin($data);
-	$url_dump=explode('/live/shoaib/shoaib/'.$id.'.m3u8',$url);
+	$url_dump=explode('/live/18531853/18531853/'.$id.'.m3u8',$url);
 	$url_base=$url_dump[0];
 	#echo $url_base;
 	$ch = curl_init();
