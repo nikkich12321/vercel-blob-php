@@ -4,7 +4,7 @@ $ch = curl_init();
     $headers = array(
 'user-agent: '.base64_encode(time()),
     );
-    curl_setopt($ch, CURLOPT_URL, 'http://livetvbox.live:8080/live/1113/1113/'.$id.'.m3u8');
+    curl_setopt($ch, CURLOPT_URL, 'http://livetvbox.live:8080/live/25252525/25252525/'.$id.'.m3u8');
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_HEADER, 0);
 #	curl_setopt($ch, CURLOPT_ENCODING, 'gzip');

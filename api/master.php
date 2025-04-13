@@ -2,7 +2,7 @@
 $data=$_REQUEST['data'];
 $id=$_REQUEST['id'];
 $url=base64_decode($data);
-$url_dump=explode('/live/1113/1113/'.$id.'.m3u8',$url);
+$url_dump=explode('/live/25252525/25252525/'.$id.'.m3u8',$url);
 $url_base=$url_dump[0];
 #echo $url_base;
 $ch = curl_init();
