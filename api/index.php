@@ -83,7 +83,7 @@ function get_url($ch_id){
 	$auth_ini = get_auth();
     $headers = array(
     'User-Agent: Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3',
-	'Cookie: mac=00:1a:79:6d:94:ce; timezone=Asia/Kolkata; adid=20fed6762d43542899eb39b4051526af',
+	'Cookie: mac=00:1a:79:b4:7c:52; timezone=Asia/Kolkata; adid=e9f038f57b94f1f66cc275173f374b18',
 	'X-User-Agent: Model: MAG270; Link: WiFi',
 	'Authorization: Bearer '.$auth_ini
     );
@@ -159,7 +159,7 @@ function get_and_refresh_auth($ini_auth,$chh_id){
 $ch = curl_init();
     $headers = array(
     'User-Agent: Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3',
-	'Cookie: mac=00:1a:79:6d:94:ce; timezone=Asia/Kolkata; adid=20fed6762d43542899eb39b4051526af',
+	'Cookie: mac=00:1a:79:b4:7c:52; timezone=Asia/Kolkata; adid=e9f038f57b94f1f66cc275173f374b18',
 	'X-User-Agent: Model: MAG270; Link: WiFi'
     );
     curl_setopt($ch, CURLOPT_URL, $id);
@@ -184,12 +184,12 @@ $ch = curl_init();
 	return $get_url_2;
 }
 function auth_verify($data){
-	$id="http://livetvbox.live:8080/portal.php?type=stb&action=get_profile&sn=008757N941477&auth_second_step=1";
+	$id="http://livetvbox.live:8080/portal.php?type=stb&action=get_profile&sn=079423N197695&auth_second_step=1";
 	$ch = curl_init();
     $headers = array(
     #'user-agent: TiviMate/5.0.4 (Android 10)',
     'User-Agent: Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3',
-	'Cookie: mac=00:1a:79:6d:94:ce; timezone=Asia/Kolkata; adid=20fed6762d43542899eb39b4051526af',
+	'Cookie: mac=00:1a:79:b4:7c:52; timezone=Asia/Kolkata; adid=e9f038f57b94f1f66cc275173f374b18',
 	'X-User-Agent: Model: MAG270; Link: WiFi',
 	'Authorization: Bearer '.$data
     );
@@ -249,7 +249,7 @@ function get_url_2($auth,$ch_id){
 	$ch = curl_init();
     $headers = array(
     'User-Agent: Mozilla/5.0 (QtEmbedded; U; Linux; C) AppleWebKit/533.3 (KHTML, like Gecko) MAG200 stbapp ver: 2 rev: 250 Safari/533.3',
-	'Cookie: mac=00:1a:79:6d:94:ce; timezone=Asia/Kolkata; adid=20fed6762d43542899eb39b4051526af',
+	'Cookie: mac=00:1a:79:b4:7c:52; timezone=Asia/Kolkata; adid=e9f038f57b94f1f66cc275173f374b18',
 	'X-User-Agent: Model: MAG270; Link: WiFi',
 	'Authorization: Bearer '.$auth
     );
